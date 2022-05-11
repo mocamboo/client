@@ -4,10 +4,13 @@ import "quill/dist/quill.snow.css";
 import "./style.css";
 import { io } from "socket.io-client";
 import toolbarOptions from "./Toolbar_options";
+import { useParams } from "react-router-dom";
 
 export default function TextEditor() {
 	const [socket, setSocket] = useState();
 	const [quill, setQuill] = useState();
+	const { id: documentID } = useParams();
+	console.log(documentID);
 
 	useEffect(() => {
 		const s = io("http://localhost:3001");
@@ -19,6 +22,7 @@ export default function TextEditor() {
 	}, []);
 
 	useEffect(() => {}, [socket, quill, documentID]);
+
 	useEffect(() => {
 		if (socket == null || quill == null) return;
 		const handler = (delta, oldDelta, source) => {
