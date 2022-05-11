@@ -18,6 +18,7 @@ export default function TextEditor() {
 		};
 	}, []);
 
+	useEffect(() => {}, [socket, quill, documentID]);
 	useEffect(() => {
 		if (socket == null || quill == null) return;
 		const handler = (delta, oldDelta, source) => {
